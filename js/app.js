@@ -9,7 +9,9 @@ Array.prototype.pick = function() {
 
 function generate() {
   var generatedText = 'Darius ' + nounPlural.pluralize() + ' what he ' + verb.pluralize();
-  $('#content').html(generatedText);
+  if (!isBad(generatedText)) {
+    $('#content').html(generatedText);
+  }
 }
 
 function getWords(suppressGenerate) {
@@ -36,6 +38,15 @@ function getWords(suppressGenerate) {
       }
     });
   });
+}
+
+function isBad(word) {
+  for (var i=0;i<badwords.length;i++) {
+    if (word.indexOf(badwords[i]) >= 0) {
+      return true;
+    }
+  }
+  return false;
 }
 
 $('#generate').click(function() { getWords(); });
