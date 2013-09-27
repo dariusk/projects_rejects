@@ -31,6 +31,10 @@ function getWords(suppressGenerate) {
       dataType:'json'
     }).done(function(verb_data) {
       console.log(verb_data);
+      if (!verb_data[0]) {
+        $('#content').html('Couldn\'t find a rhyme :(');
+        return;
+      }
       verb = verb_data[0].words.pick();
       console.log(verb);
       if (!suppressGenerate) {
